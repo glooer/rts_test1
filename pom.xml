@@ -25,6 +25,19 @@
         <type>pom</type>
     </dependency>
 
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+     <groupId>org.postgresql</groupId>
+     <artifactId>postgresql</artifactId>
+     <version>42.1.4</version>
+    </dependency>
+
   </dependencies>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>

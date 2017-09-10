@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<fmt:requestEncoding value="UTF-8" />
+<%@ page import="java.util.HashMap,models.Human" %>
 <% request.setCharacterEncoding("utf-8"); %>
+
 
 <!DOCTYPE html>
 <html>
@@ -22,13 +23,13 @@
 
             <div class="row">
               <div class="col-md-4">
-                <input class="form-control" type="text" name="first-name" value="<%= helper.Other.replaceNull(request.getParameter("first-name")) %>" placeholder="Имя">
+                <input class="form-control" type="text" name="first_name" value="<%= helper.Other.replaceNull(request.getParameter("first_name")) %>" placeholder="Имя">
               </div>
               <div class="col-md-4">
-                <input class="form-control" type="text" name="last-name" value="<%= helper.Other.replaceNull(request.getParameter("last-name")) %>" placeholder="Фамилия">
+                <input class="form-control" type="text" name="last_name" value="<%= helper.Other.replaceNull(request.getParameter("last_name")) %>" placeholder="Фамилия">
               </div>
               <div class="col-md-4">
-                <input class="form-control" type="text" name="middle-name" value="<%= helper.Other.replaceNull(request.getParameter("middle-name")) %>" placeholder="Отчество">
+                <input class="form-control" type="text" name="middle_name" value="<%= helper.Other.replaceNull(request.getParameter("middle_name")) %>" placeholder="Отчество">
               </div>
             </div>
           </div>
@@ -37,16 +38,45 @@
             <h4>Поиск по городу</h4>
             <input class="form-control" type="text" name="city" value="<%= helper.Other.replaceNull(request.getParameter("city")) %>" placeholder="Город">
           </div>
+
+					<div class="form-group">
+            <h4>Поиск по машине</h4>
+						<div class="row">
+							<div class="col-md-6">
+								<input class="form-control" type="text" name="car" value="<%= helper.Other.replaceNull(request.getParameter("car")) %>" placeholder="Название машины">
+							</div>
+							<div class="col-md-6">
+								<input class="form-control" type="text" name="car_gos" value="<%= helper.Other.replaceNull(request.getParameter("car_gos")) %>" placeholder="Номер машины">
+
+							</div>
+						</div>
+          </div>
           <div class="form-group">
             <button class="btn btn-light" type="submit">Поиск!</button>
           </div>
 
 
         </form>
+				<div class="js-result">
+
+				</div>
+				<%-- <table class="table">
+
+				<%
+
+				HashMap<String, Human> userList = web.app.search.SearchHuman.byHttpParams(request);
+				out.print(web.app.search.SearchHuman.getHtml(userList));
+
+
+				%>
+				</table> --%>
+
+
+
       </div>
     </div>
 
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -62,9 +92,11 @@
 
         if (!is_okay) {
           alert('Необходимо заполнить хотя бы одно поле!')
-          return false;
-        }
+        } else {
+					$('.js-result').load("/hello", $(this).serializeArray())
+				}
 
+				return false;
       })
     </script>
 	</body>
