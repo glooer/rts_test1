@@ -72,7 +72,7 @@ public class HumanRepo {
         continue;
       }
 
-      query += " AND " + filter_to_sql.get(filter_item.get("key")) + " like " + helper.Other.escapeString(filter_item.get("value"));
+      query += " AND UPPER(" + filter_to_sql.get(filter_item.get("key")) + ") like " + helper.Other.escapeString(filter_item.get("value").toUpperCase());
     }
 
     query += " LIMIT 1000";
