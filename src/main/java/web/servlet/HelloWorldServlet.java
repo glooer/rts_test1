@@ -18,12 +18,9 @@ public class HelloWorldServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
 
-
         PrintWriter pw = resp.getWriter();
 
         HashMap<String, Human> userList = web.app.search.SearchHuman.byHttpParams(req);
         pw.println(web.app.search.SearchHuman.getHtml(userList));
-        // pw.println("<H1>Hello, world! или Привет мир</H1>");
-
     }
 }

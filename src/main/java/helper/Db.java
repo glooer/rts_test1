@@ -31,6 +31,25 @@ public class Db {
     }
   }
 
+  public void execUpdate(String update) {
+    try {
+      Statement stmt = this.connect.createStatement();
+      stmt.execute(update);
+      stmt.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  public void close() {
+    try {
+      this.connect.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public <T> T query(String sql, DbResultHandler<T> handler) {
 
     T result = null;

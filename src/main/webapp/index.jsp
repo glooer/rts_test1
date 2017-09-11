@@ -2,7 +2,24 @@
 <%@ page import="java.util.HashMap,models.Human" %>
 <% request.setCharacterEncoding("utf-8"); %>
 
+<%
 
+
+String auth_hash = "";
+
+for (Cookie cookie : request.getCookies()) {
+	if (cookie.getName().equals("auth_hash")) {
+		auth_hash = cookie.getValue();
+	};
+}
+
+String current_user = helper.Auth.isAuth(auth_hash);
+
+if (current_user.equals("")) {
+	response.sendRedirect("/auth");
+}
+
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,11 +29,28 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
+		<header>
 
+			<nav class="navbar navbar-light bg-light justify-content-between">
+				<div class="container">
+					<a href="/" class="navbar-brand"><%= current_user %></a>
+					<ul class="navbar-nav">
+						<li class="nav-item active">
+							<% if (current_user.isEmpty()) {%>
+								<a class="nav-link" href="/auth/">Вход</a>
+							<% } else { %>
+								<a class="nav-link" href="/auth/process?unlogin=true">Выход</a>
+							<% } %>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+		</header>
+		<br>
 
     <div class="warp">
       <div class="container">
-        <h3>Поиск человека в бд</h3>
         <form method="post" class="js-main-search-form">
           <div class="form-group">
             <h4>Поиск по фио</h4>

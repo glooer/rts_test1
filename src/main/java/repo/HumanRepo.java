@@ -1,7 +1,6 @@
 package repo;
 import java.util.ArrayList;
 import java.util.HashMap;
-import helper.Factory;
 import helper.Db;
 import models.Human;
 import models.City;

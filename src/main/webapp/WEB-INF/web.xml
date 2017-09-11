@@ -8,9 +8,19 @@
     <servlet-class>web.servlet.HelloWorldServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>auth</servlet-name>
+    <servlet-class>web.servlet.AuthServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>hello</servlet-name>
     <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>auth</servlet-name>
+    <url-pattern>/auth/process</url-pattern>
   </servlet-mapping>
 
 </web-app>
